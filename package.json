@@ -1,0 +1,26 @@
+{
+  "name": "softuni---cubilcle",
+  "version": "1.0.0",
+  "description": "Softuni JS Backend Project",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Medi-Demirev/softuni---cubilcle.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Medi-Demirev/softuni---cubilcle/issues"
+  },
+  "homepage": "https://github.com/Medi-Demirev/softuni---cubilcle#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}
