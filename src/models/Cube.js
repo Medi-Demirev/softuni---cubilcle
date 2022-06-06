@@ -1,31 +1,31 @@
-const mongoose = require('mongoose'); 
+const mongoose = require('mongoose');
 
 const cubeSchema = new mongoose.Schema({
-    _id: mongoose.Types.ObjectId,
     name: {
         type: String,
         required: true,
     },
-    descryption:{
-        type:String,
+    description: {
+        type: String,
         required: true,
         maxlength: 120,
     },
-    imageUrl:{
-        type:String,
+    imageUrl: {
+        type: String,
         required: true,
     },
-    difficultyLevel:{
+    difficultyLevel: {
         type: Number,
         required: true,
         min: 1,
         max: 6,
-    }
+    },
+
 });
 
-cubeSchema.path('iamgeUrl').validate(function () {
-    return this.imageUrl.startsWith('http', 'image url should be a link' )
-});
+cubeSchema.path('imageUrl').validate(function() {
+    return this.imageUrl.startsWith('https');
+}, 'Image url should be a link');
 
 const Cube = mongoose.model('Cube', cubeSchema);
 
