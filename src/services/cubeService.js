@@ -5,13 +5,12 @@ const Cube = require('../models/Cube');
 
 
 exports.getAll =   (search = '', fromInput, toInput) => {
+  const from = Number(fromInput) || 0;
+  const to = Number(toInput) || 6;
   
-  let cubes = Cube.find().lean()
-  console.log(mongoose.Types.ObjectId.isValid('629e4a4aa4129e17f38a179e'));
-  //  const from = Number(fromInput) || 0;
-  //  const to = Number(toInput) || 6;
-  //  const result = cubes
-  // // .filter(x => x.difficultyLevel >= from && x.difficultyLevel <= to)
+  let cubes = Cube.find({name:{$regex: new RegExp(search, "i")}})
+  .where('difficultyLevel').lte(to).gte(from)
+  .lean()
  
   return cubes
     
