@@ -11,10 +11,10 @@ const accessorySchema = new mongoose.Schema({
     imageUrl:{
         type: String,
         required: true,
-        validate:{
-            validator: /^https?/g,
+        /*validate:{
+            validator: /^https/g,
             message: 'ImageUrl should start with http/s'
-        }
+        }*/
     },
     description:{
         type: String,
@@ -29,6 +29,9 @@ const accessorySchema = new mongoose.Schema({
      ]
 
 })
+accessorySchema.path('imageUrl').validate(function() {
+    return this.imageUrl.startsWith('https');
+}, 'Image url should be a link');
 
 const Accessory = mongoose.model('Accessory', accessorySchema);
 
