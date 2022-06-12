@@ -16,4 +16,6 @@ exports.register = async ({username, password, repeatPassword}) => {
     }); 
 
     return createdUser;
-}
+};
+
+exports.login

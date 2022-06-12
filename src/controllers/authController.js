@@ -16,6 +16,16 @@ router.post('/register',  async (req, res)=>{
         res.redirect('404')
     }
 
+});
+
+router.get('/login', (req, res)=>{
+    res.render('auth//login')
+});
+
+router.post('/login', async (req, res) => {
+    await authService.login(req.body)
+    res.render('/')
 })
+
 
 module.exports = router;
