@@ -1,15 +1,16 @@
 const router = require('express').Router();
 const cubeService = require('../services/cubeService');
 const accessoryService = require('../services/accessoryService');
+const {isAuth} = require('../middlewares/authMiddleware')
 const mongoose = require('mongoose');
-const { render } = require('express/lib/response');
 
-router.get('/create', (req, res)=>{
+
+router.get('/create',isAuth, (req, res)=>{
     res.render('create');
 
 });
 
-router.post('/create', async (req, res) => {
+router.post('/create', isAuth, async (req, res) => {
     const cube = req.body;
 
     // Validate
