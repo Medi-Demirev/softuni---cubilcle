@@ -32,6 +32,11 @@ router.post('/login', async (req, res) => {
 
     res.cookie(sessionName, token, {httpOnly: true})
     res.redirect('/')
+});
+
+router.get('/logout', (req, res) =>{
+    res.clearCookie(sessionName);
+    res.redirect('/')
 })
 
 
