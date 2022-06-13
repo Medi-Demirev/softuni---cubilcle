@@ -2,9 +2,8 @@ const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const res = require("express/lib/response");
+const  { saltRound, secret} = require('../config/appConstants');
 
-const saltRound = 10;
-const secret = 'gdfgdfji3ji48y3$fdfkd^gjifd48gdfkm;sdkcnldf9';
 
 exports.register = async ({ username, password, repeatPassword }) => {
   if (password !== repeatPassword) {
