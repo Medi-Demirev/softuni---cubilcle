@@ -34,8 +34,9 @@ router.get('/details/:id',  async (req, res)=>{
     
     if( !mongoose.Types.ObjectId.isValid(req.params.id) ) return false;
 
-    const cube =   await cubeService.getOneDetails(req.params.id).lean()
-    res.render('details', {cube})
+    const cube =   await cubeService.getOneDetails(req.params.id).lean();
+    const isOwner = cube.owner == req.user?._id
+    res.render('details', {cube, isOwner})
 })
 
 router.get('/:cubeId/attach-accessory', async (req, res)=>{
