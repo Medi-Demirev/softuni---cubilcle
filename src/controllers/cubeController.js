@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const cubeService = require('../services/cubeService');
 const accessoryService = require('../services/accessoryService');
-const {isAuth} = require('../middlewares/authMiddleware')
+const {isAuth} = require('../middlewares/authMiddleware');
+
 const mongoose = require('mongoose');
 
 
@@ -12,7 +13,7 @@ router.get('/create',isAuth, (req, res)=>{
 
 router.post('/create', isAuth, async (req, res) => {
     const cube = req.body;
-
+    cube.owner = req.user._id
     // Validate
     if (cube.name.length < 2) {
         return res.status(400).send('Invalid request');
@@ -52,10 +53,13 @@ router.post('/:cubeId/attach-accessory', async(req, res)=>{
     res.redirect(`/cube/details/${req.params.cubeId}`)
 });
 
-router.get('/:cubeId/edit',async (req, res)=>{
+router.get('/:cubeId/edit', isAuth ,async (req, res)=>{
 
-    console.log(req.user);
     const cube = await cubeService.getOne(req.params.cubeId).lean()
+
+    if (cube.owner != req.user._id) {
+        return res.redirect('/404')
+    }
     cube[`difficultyLevel${cube.difficultyLevel}`] = true
 
     if (!cube) {
